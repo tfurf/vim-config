@@ -13,10 +13,10 @@ let g:loaded_airline=1
 " let g:powerline_loaded=1
 
 " For solarized theme. This was a pain to figure out the best setting.
-set t_Co=16
-set background=dark
-call togglebg#map("<F5>")
-colorscheme solarized
+" set t_Co=16
+" set background=dark
+" call togglebg#map("<F5>")
+" colorscheme solarized
 
 " Pathogen
 execute pathogen#infect()
