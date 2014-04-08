@@ -26,6 +26,9 @@ nnoremap <f1> :BufExplorer<cr>
 nnoremap <f2> :NERDTreeToggle<cr>
 nnoremap <f3> :TagbarToggle<cr>
 
+"search selected text and replace
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
 set sw=2
 set ts=2
 set title
@@ -43,6 +46,7 @@ augroup vimrc_filetype
     autocmd FileType c  call s:MyCppSettings()    " C is same as Cpp
     autocmd FileType cpp call s:MyCppSettings()
     autocmd FileType tex call s:MyTeXSettings()
+    autocmd FileType plaintex call s:MyTeXSettings()
     autocmd Filetype bib call s:MyBiBSettings() " TeX and BiB are the same.
     autocmd FileType sh call s:MyBashSettings()
     autocmd FileType python call s:MyPythonSettings()
@@ -127,8 +131,11 @@ endfunction "s:MyMakeSettings()
 
 function! s:MyTeXSettings()
     set wrap
-    set tw=79
+    set tw=0
+    set wm=0
     set expandtab
+    set spell
+    setlocal spell spelllang=en_gb
     " For latex-box
     map <S-F9> <C-X><C-O>
     map <buffer> [[ \begin{
