@@ -1,5 +1,6 @@
 # Stuff pulled from GitHub
 
+* **airline**:       `git clone https://github.com/bling/vim-airline vim-airline`
 * **FSwitch**:       `git clone https://github.com/derekwyatt/vim-fswitch.git vim-fswitch`
 * **LaTeX-BoX**:     `git clone https://github.com/LaTeX-Box-Team/LaTeX-Box.git vim-latex-box`
 * **MWUtils**:       `git clone https://github.com/MarcWeber/vim-addon-mw-utils.git vim-mwutils`

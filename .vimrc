@@ -9,9 +9,6 @@ endif
 " Airline needs work.
 let g:loaded_airline=1
 
-" Why is powerline fubaring on vimdiff?
-" let g:powerline_loaded=1
-
 " For solarized theme. This was a pain to figure out the best setting.
 " set t_Co=16
 " set background=dark
