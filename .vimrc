@@ -12,7 +12,6 @@ execute pathogen#infect()
 
 "explorer mappings
 nnoremap <f1> :NERDTreeToggle<cr>
-nnoremap <f2> :TagbarToggle<cr>
 
 "search selected text and replace
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
@@ -52,22 +51,6 @@ function! s:MyCppSettings()
     "FSwitch
     au! BufEnter *.cpp let b:fswitchdst = 'hpp,h' | let b:fswitchlocs= './'
     au! BufEnter *.h let b:fswitchdst = 'cpp,c' | let b:fswitchlocs= './'
-    " For ctags and taglist:
-    nnoremap <silent> <S-F9> :TlistToggle<CR> 
-    map <C-F12> :!ctags -R --c++-kinds=+lp --fields=+iaS --extra=+q .<CR>
-    set tags+=~/.vim/tags/cpp
-    let g:Tlist_WinWidth = 40            "Sets width of taglist pane, default is 30.A
-    let g:Tlist_Display_Prototype = 1    "Display tag prototypes and tag names in window.
-    let g:Tlist_Compact_Format = 1       " Compact format..
-    let g:Tlist_File_Fold_Auto_Close = 1 " Automatically fold unfocused (files)in tree
-    let g:Tlist_Process_File_Always = 1
-    let g:Tlist_GainFocus_On_ToggleOpen = 1
-    set ofu=omni#cpp#complete#Main
-"    inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
-"        \ "\<lt>C-n>" :
-"        \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-"        \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-"        \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
     imap <C-@> <C-Space>
     au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
     " --- OmniCppComplete ---
@@ -83,7 +66,6 @@ function! s:MyCppSettings()
     let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
     let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e.  parameters) in popup window
     let OmniCpp_ShowScopeInAbbr = 1 " 
-
 endfunction
 
 function! s:MyTeXSettings()
