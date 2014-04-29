@@ -13,3 +13,4 @@
 * **Surround**:      `git clone https://github.com/tpope/vim-surround.git vim-surround`
 * **Pathogen**:      `git clone https://github.com/tpope/vim-pathogen.git vim-pathogen`
 * **VOoM**:          `git clone https://github.com/vim-voom/VOoM.git vim-voom`
+* **gitgutter**:     `git clone https://github.com/airblade/vim-gitgutter vim-gitgutter`

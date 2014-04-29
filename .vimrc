@@ -13,6 +13,13 @@ execute pathogen#infect()
 "explorer mappings
 nnoremap <f1> :NERDTreeToggle<cr>
 
+" airline 
+set laststatus=2
+let g:airline_powerline_fonts = 1
+
+"gitgutter
+highlight clear SignColumn
+
 "search selected text and replace
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
