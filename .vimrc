@@ -6,20 +6,13 @@ if has("autocmd")
     filetype plugin indent on
 endif
 
-
-" For solarized theme. This was a pain to figure out the best setting.
-" set t_Co=16
-" set background=dark
-" call togglebg#map("<F5>")
-" colorscheme solarized
-
 " Pathogen
+runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 
 "explorer mappings
-nnoremap <f1> :BufExplorer<cr>
-nnoremap <f2> :NERDTreeToggle<cr>
-nnoremap <f3> :TagbarToggle<cr>
+nnoremap <f1> :NERDTreeToggle<cr>
+nnoremap <f2> :TagbarToggle<cr>
 
 "search selected text and replace
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
@@ -35,6 +28,7 @@ set ignorecase
 set smartcase
 set scrolloff=4
 set smarttab
+set expandtab
 
 augroup vimrc_filetype
     autocmd!
@@ -42,34 +36,19 @@ augroup vimrc_filetype
     autocmd FileType cpp call s:MyCppSettings()
     autocmd FileType tex call s:MyTeXSettings()
     autocmd FileType plaintex call s:MyTeXSettings()
-    autocmd Filetype bib call s:MyBiBSettings() " TeX and BiB are the same.
-    autocmd FileType sh call s:MyBashSettings()
-    autocmd FileType python call s:MyPythonSettings()
-    autocmd FileType make call s:MyMakeSettings()
-    autocmd FileType vim call s:MyVimSettings()
-    autocmd FileType matlab call s:MyMatlabSettings()
-    autocmd FileType tcl call s:MyTclSettings()
     autocmd FileType xml call s:MyXmlSettings()
     autocmd FileType yaml call s:MyXmlSettings()
     autocmd FileType kml call s:MyXmlSettings()
     autocmd FileType xslt call s:MyXmlSettings()
-    autocmd FileType javascript call s:MyTclSettings()
     autocmd BufRead,BufNewFile *.launch set filetype=xml
 augroup end
 
 function! s:MyXmlSettings()
     let g:xml_syntax_folding=1
     au BufNewFile,BufRead *.xml,*.htm,*.html,*.xslt so ~/.vim/plugin/XMLFolding.vim
-    set expandtab
-endfunction
-
-function! s:MyTclSettings()
-    set smartindent
-    set expandtab
 endfunction
 
 function! s:MyCppSettings()
-    set expandtab
     "FSwitch
     au! BufEnter *.cpp let b:fswitchdst = 'hpp,h' | let b:fswitchlocs= './'
     au! BufEnter *.h let b:fswitchdst = 'cpp,c' | let b:fswitchlocs= './'
@@ -107,29 +86,10 @@ function! s:MyCppSettings()
 
 endfunction
 
-function! s:MyMatlabSettings()
-    set expandtab
-    source $VIMRUNTIME/macros/matchit.vim
-    autocmd BufEnter *.m compiler mlint
-endfunction
-
-function! s:MyVimSettings()
-    set expandtab
-endfunction
-
-function! s:MyBashSettings()
-    set expandtab
-endfunction "End s:MyBashSettings()
-
-function! s:MyMakeSettings()
-    set titlestring=%f
-endfunction "s:MyMakeSettings()
-
 function! s:MyTeXSettings()
     set wrap
     set tw=0
     set wm=0
-    set expandtab
     set spell
     setlocal spell spelllang=en_gb
     " For latex-box
@@ -148,13 +108,4 @@ function! s:MyTeXSettings()
     " For inline verbose:
     let g:surround_61 = "\\verb=\r="
     let g:surround_45 = "\$\r=i\$"
-endfunction "s:MyTeXSettings()
-
-function! s:MyBiBSettings()
-    set tw=79
-    set expandtab
-endfunction "s:MyBiBSettings()
-
-function! s:MyPythonSettings()
-    set expandtab
-endfunction "s:MyBiBSettings()
+endfunction 
