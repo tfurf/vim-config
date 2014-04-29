@@ -6,8 +6,6 @@ if has("autocmd")
     filetype plugin indent on
 endif
 
-" Airline needs work.
-let g:loaded_airline=1
 
 " For solarized theme. This was a pain to figure out the best setting.
 " set t_Co=16
@@ -54,13 +52,14 @@ augroup vimrc_filetype
     autocmd FileType xml call s:MyXmlSettings()
     autocmd FileType yaml call s:MyXmlSettings()
     autocmd FileType kml call s:MyXmlSettings()
+    autocmd FileType xslt call s:MyXmlSettings()
     autocmd FileType javascript call s:MyTclSettings()
     autocmd BufRead,BufNewFile *.launch set filetype=xml
 augroup end
 
 function! s:MyXmlSettings()
     let g:xml_syntax_folding=1
-    au BufNewFile,BufRead *.xml,*.htm,*.html so ~/.vim/plugin/XMLFolding.vim
+    au BufNewFile,BufRead *.xml,*.htm,*.html,*.xslt so ~/.vim/plugin/XMLFolding.vim
     set expandtab
 endfunction
 
