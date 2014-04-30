@@ -18,12 +18,13 @@ colorscheme solarized
 "explorer mappings
 nnoremap <f1> :NERDTreeToggle<cr>
 
-" airline 
+" airline
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'base16'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace#enabled = 0
 
 "gitgutter
 highlight clear SignColumn
@@ -80,7 +81,7 @@ function! s:MyCppSettings()
     let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
     let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
     let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e.  parameters) in popup window
-    let OmniCpp_ShowScopeInAbbr = 1 " 
+    let OmniCpp_ShowScopeInAbbr = 1 "
 endfunction
 
 function! s:MyTeXSettings()
@@ -96,13 +97,13 @@ function! s:MyTeXSettings()
     nmap <buffer> <F5> <Plug>LatexChangeEnv
     vmap <buffer> <F7> <Plug>LatexWrapSelection
     vmap <buffer> <S-F7> <Plug>LatexEnvWrapSelection
-    imap <buffer> (( \eqref{ 
+    imap <buffer> (( \eqref{
     " let g:LatexBox_latexmk_options = '-pvc'
     let g:LatexBox_latexmk_async=1
     let g:LatexBox_latexmk_preview_continuously=1
     " Reformat paragraph.
-    map <S-F12> gqip       
+    map <S-F12> gqip
     " For inline verbose:
     let g:surround_61 = "\\verb=\r="
     let g:surround_45 = "\$\r=i\$"
-endfunction 
+endfunction
