@@ -10,12 +10,20 @@ endif
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 
+"Color
+set t_Co=256
+set background=dark
+colorscheme solarized
+
 "explorer mappings
 nnoremap <f1> :NERDTreeToggle<cr>
 
 " airline 
 set laststatus=2
 let g:airline_powerline_fonts = 1
+let g:airline_theme = 'base16'
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 
 "gitgutter
 highlight clear SignColumn
