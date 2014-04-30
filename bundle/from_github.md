@@ -14,3 +14,7 @@
 * **Pathogen**:      `git clone https://github.com/tpope/vim-pathogen.git vim-pathogen`
 * **VOoM**:          `git clone https://github.com/vim-voom/VOoM.git vim-voom`
 * **gitgutter**:     `git clone https://github.com/airblade/vim-gitgutter vim-gitgutter`
+
+# vim-256color
+# vim-colorscheme-test
+# vim-xterm-color-table
