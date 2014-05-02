@@ -17,6 +17,7 @@ colorscheme solarized
 
 "explorer mappings
 nnoremap <f1> :NERDTreeToggle<cr>
+let g:NERDTreeShowHidden = 1
 
 " airline
 set laststatus=2
