@@ -6,6 +6,9 @@ if has("autocmd")
     filetype plugin indent on
 endif
 
+set wildmode=longest,list,full
+set wildmenu
+
 " Pathogen
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
@@ -70,6 +73,7 @@ function! s:MyCppSettings()
     au! BufEnter *.h let b:fswitchdst = 'cpp,c' | let b:fswitchlocs= './'
     imap <C-@> <C-Space>
     au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+    nmap <silent> <Leader>of :FSHere<cr>
     " --- OmniCppComplete ---
     " -- optional --
     " auto close options when exiting insert mode
