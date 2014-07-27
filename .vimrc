@@ -1,13 +1,14 @@
 syntax on
 set sessionoptions=blank,buffers,curdir,folds,globals,help,localoptions,options,resize
 set hidden
+
 set nocp
 if has("autocmd")
     filetype plugin indent on
 endif
 
-set wildmode=longest,list,full
-set wildmenu
+"set wildmode=longest,list,full
+"set wildmenu
 
 " Pathogen
 runtime bundle/vim-pathogen/autoload/pathogen.vim
