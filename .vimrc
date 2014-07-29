@@ -6,6 +6,9 @@ if has("autocmd")
     filetype plugin indent on
 endif
 
+set wildmenu
+set wildmode=list:longest
+
 " Pathogen
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
@@ -99,8 +102,7 @@ function! s:MyTeXSettings()
     vmap <buffer> <F7> <Plug>LatexWrapSelection
     vmap <buffer> <S-F7> <Plug>LatexEnvWrapSelection
     imap <buffer> (( \eqref{
-    " let g:LatexBox_latexmk_options = '-pvc'
-    let g:LatexBox_latexmk_async=1
+    "let g:LatexBox_latexmk_async=0
     let g:LatexBox_latexmk_preview_continuously=1
     " Reformat paragraph.
     map <S-F12> gqip
