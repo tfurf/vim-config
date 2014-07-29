@@ -1,6 +1,7 @@
 syntax on
 set sessionoptions=blank,buffers,curdir,folds,globals,help,localoptions,options,resize
 set hidden
+
 set nocp
 if has("autocmd")
     filetype plugin indent on
@@ -73,6 +74,7 @@ function! s:MyCppSettings()
     au! BufEnter *.h let b:fswitchdst = 'cpp,c' | let b:fswitchlocs= './'
     imap <C-@> <C-Space>
     au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+    nmap <silent> <Leader>of :FSHere<cr>
     " --- OmniCppComplete ---
     " -- optional --
     " auto close options when exiting insert mode

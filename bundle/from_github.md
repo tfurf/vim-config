@@ -14,7 +14,9 @@
 * **Pathogen**:      `git clone https://github.com/tpope/vim-pathogen.git vim-pathogen`
 * **VOoM**:          `git clone https://github.com/vim-voom/VOoM.git vim-voom`
 * **gitgutter**:     `git clone https://github.com/airblade/vim-gitgutter vim-gitgutter` 
-* **solarized**:      `git clone https://github.com/altercation/vim-colors-solarized vim-colors-solarized`
+* **solarized**:     `git clone https://github.com/altercation/vim-colors-solarized vim-colors-solarized`
+* **command-t**:     `git clone https://github.com/wincent/command-t vim-command-t`
+* **bufstop**:       `git clone https://github.com/mihaifm/bufstop.git vim-bufstop`
 
 # vim-256color
 # vim-colorscheme-test
