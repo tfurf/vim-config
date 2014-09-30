@@ -23,6 +23,12 @@ colorscheme solarized
 nnoremap <f1> :NERDTreeToggle<cr>
 let g:NERDTreeShowHidden = 1
 
+" Switch syntax highlighting on, when the terminal has colors
+if &t_Co > 2 || has("gui_running")
+  highlight ExtraWhitespace ctermbg=red guibg=red
+  match ExtraWhitespace /\s\+$\|\t/
+endif
+
 " airline
 set laststatus=2
 let g:airline_powerline_fonts = 1
@@ -65,7 +71,6 @@ augroup end
 
 function! s:MyXmlSettings()
     let g:xml_syntax_folding=1
-    au BufNewFile,BufRead *.xml,*.htm,*.html,*.xslt so ~/.vim/plugin/XMLFolding.vim
 endfunction
 
 function! s:MyCppSettings()
