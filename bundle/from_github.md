@@ -17,6 +17,7 @@
 * **solarized**:     `git clone https://github.com/altercation/vim-colors-solarized vim-colors-solarized`
 * **command-t**:     `git clone https://github.com/wincent/command-t vim-command-t`
 * **bufstop**:       `git clone https://github.com/mihaifm/bufstop.git vim-bufstop`
+* **markdown**:      `git clone https://github.com/plasticboy/vim-markdown vim-markdown`
 
 # vim-256color
 # vim-colorscheme-test
