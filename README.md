@@ -1,10 +1,10 @@
 This is largely a fork of [derekwyatt's vim-config](https://github.com/derekwyatt/vim-config).
 
-I usually install this to fresh machines with 
+I usually install this to fresh machines with
 
 ```
 $ cd ~
-$ git clone https://github.com/tfurf/vim-config .vim`
+$ git clone https://github.com/tfurf/vim-config .vim
 $ cd .vim
 $ ./install.sh
 ```
