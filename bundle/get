@@ -1,8 +1,7 @@
 #!/bin/bash
-
 pluglist=
 if [[ $# == 0 ]]; then
-    pluglist="$(grep '\*\*[^\*]*\*\*' from_github.md | sed 's/^....\([^:]*\)..:.*$/\1/')"
+    pluglist="$(grep '\* \*\*[^\*]*\*\*' from_github.md | sed 's/^....\([^:]*\)..:.*$/\1/')"
 else
     pluglist="$@"
 fi
