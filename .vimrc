@@ -84,18 +84,26 @@ function! s:MyCppSettings()
     au! BufEnter *.h let b:fswitchdst = 'cpp,c' | let b:fswitchlocs= './'
     imap <C-@> <C-Space>
     au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+    " -- FSwitch --
     nmap <silent> <Leader>of :FSHere<cr>
+    " -- Taglist --
+    nnoremap <silent> <F8> :TlistToggle<CR>
+    let Tlist_Auto_Open = 1    " Start with taglist open.
+    let TlistAddFileAlways = 1 " Add new files to the taglist.
+    let Tlist_Enable_Fold_Column = 0 " Remove the fold columns.
+    let Tlist_File_Fold_Auto_Close = 1 " Automatically remove stale files from taglist.
+    let Tlist_Highlight_Tag_On_BufEnter = 1 " On entering buffer, highlight the current tag..
     " --- OmniCppComplete ---
     " -- optional --
     " auto close options when exiting insert mode
     set completeopt=menu,menuone,longest,preview
     " -- configs --
-    let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
-    let OmniCpp_GlobalScopeSearch = 2 " search namespaces in this and included files
-    let OmniCpp_MayCompleteDot = 1 " autocomplete with .
-    let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
-    let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
-    let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
+    let OmniCpp_NamespaceSearch = 2     " search namespaces in this and included files
+    let OmniCpp_GlobalScopeSearch = 2   " search namespaces in this and included files
+    let OmniCpp_MayCompleteDot = 1      " autocomplete with .
+    let OmniCpp_MayCompleteArrow = 1    " autocomplete with ->
+    let OmniCpp_MayCompleteScope = 1    " autocomplete with ::
+    let OmniCpp_SelectFirstItem = 2     " select first item (but don't insert)
     let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e.  parameters) in popup window
     let OmniCpp_ShowScopeInAbbr = 1 "
 endfunction
