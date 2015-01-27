@@ -58,6 +58,7 @@ set expandtab
 
 augroup vimrc_filetype
     autocmd!
+    autocmd FileType python call s:MyPythonSettings()    " C is same as Cpp
     autocmd FileType c  call s:MyCppSettings()    " C is same as Cpp
     autocmd FileType cpp call s:MyCppSettings()
     autocmd FileType tex call s:MyTeXSettings()
@@ -68,6 +69,10 @@ augroup vimrc_filetype
     autocmd FileType xslt call s:MyXmlSettings()
     autocmd BufRead,BufNewFile *.launch set filetype=xml
 augroup end
+
+function! s:MyPythonSettings()
+  set sw=2
+endfunction
 
 function! s:MyXmlSettings()
     let g:xml_syntax_folding=1
