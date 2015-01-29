@@ -9,6 +9,7 @@
 * **fugitive**:      `git clone https://github.com/tpope/vim-fugitive.git vim-fugitive`
 * **gitgutter**:     `git clone https://github.com/airblade/vim-gitgutter vim-gitgutter`
 * **jedi**:          `git clone --recursive https://github.com/davidhalter/jedi-vim.git vim-jedi`
+* **thesaurus**:     `git clone https://github.com/beloglazov/vim-online-thesaurus.git vim-online-thesaurus`
 * **NERDTree**:      `git clone https://github.com/scrooloose/nerdtree.git vim-nerdtree`
 * **Pathogen**:      `git clone https://github.com/tpope/vim-pathogen.git vim-pathogen`
 * **Protodef**:      `git clone https://github.com/derekwyatt/vim-protodef.git vim-protodef`
