@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cwd=$(dirname $0); 
+CWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 t=".vimrc"
 
 while getopts f? k; do
@@ -15,8 +15,8 @@ while getopts f? k; do
 done
 
 for f in ${t}; do
-  [[ -f ${cwd}/${f} ]] && { 
-    [[ ${force} == "yes" ]] && mv -v ~/${f} ~/${f}.bak;
-    ln -vT ${cwd}/${f} ~/${f} ;
+  [[ -f ${CWD}/${f} ]] && {
+    [[ ${force} == "yes" ]] && rm -v ~/${f} ;
+    ln -vsT ${CWD}/${f} ~/${f} ;
   }
 done;
