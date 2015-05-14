@@ -83,9 +83,8 @@ function! s:MyCppSettings()
     au! BufEnter *.cpp let b:fswitchdst = 'hpp,h' | let b:fswitchlocs= './'
     au! BufEnter *.h let b:fswitchdst = 'cpp,c' | let b:fswitchlocs= './'
     imap <C-@> <C-Space>
-    au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-    " -- FSwitch --
     nmap <silent> <Leader>of :FSHere<cr>
+    au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
     " -- Taglist --
     nnoremap <silent> <F8> :TlistToggle<CR>
     let Tlist_Auto_Open = 1    " Start with taglist open.
