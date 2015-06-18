@@ -2,14 +2,14 @@
 
 pluglist=
 if [[ $# == 0 ]]; then
-    pluglist="$(grep '\*\*[^\*]*\*\*' from_github.md | sed 's/^....\([^:]*\)..:.*$/\1/')"
+    pluglist="$(grep '\* \*\*[^\*]*\*\*' from_github.md | sed 's/^....\([^:]*\)..:.*$/\1/')"
 else
     pluglist="$@"
 fi
 for f in $pluglist
 do
     clone="$(grep $f from_github.md | sed 's/.*`\(.*\)`.*$/\1/')"
-    d=$(echo $clone | cut -f4 -d' ')
+    d=$(rev <<< $clone | cut -f1 -d' ' | rev)
     if [[ ! -d "$d" ]]; then
         eval $clone
     fi
