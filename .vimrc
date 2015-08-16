@@ -64,7 +64,6 @@ augroup vimrc_filetype
     autocmd FileType tex call s:MyTeXSettings()
     autocmd FileType plaintex call s:MyTeXSettings()
     autocmd FileType xml call s:MyXmlSettings()
-    autocmd FileType yaml call s:MyXmlSettings()
     autocmd FileType kml call s:MyXmlSettings()
     autocmd FileType xslt call s:MyXmlSettings()
     autocmd BufRead,BufNewFile *.launch set filetype=xml
@@ -75,6 +74,7 @@ function! s:MyPythonSettings()
 endfunction
 
 function! s:MyXmlSettings()
+    set syntax=xml
     let g:xml_syntax_folding=1
 endfunction
 
