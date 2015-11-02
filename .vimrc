@@ -66,6 +66,7 @@ augroup vimrc_filetype
     autocmd FileType xml call s:MyXmlSettings()
     autocmd FileType kml call s:MyXmlSettings()
     autocmd FileType xslt call s:MyXmlSettings()
+    autocmd FileType mail call s:MyTextSettings()
     autocmd BufRead,BufNewFile *.launch set filetype=xml
 augroup end
 
@@ -106,6 +107,13 @@ function! s:MyCppSettings()
     let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e.  parameters) in popup window
     let OmniCpp_ShowScopeInAbbr = 1 "
 endfunction
+
+function! s:MyTextSettings()
+    set wrap
+    set tw=0
+    set wm=0
+    set spell
+    setlocal spell spelllang=en_gb
 
 function! s:MyTeXSettings()
     set wrap
