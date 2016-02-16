@@ -1,6 +1,7 @@
 # Stuff pulled from GitHub
 
-* **airline**:       `git clone https://github.com/bling/vim-airline vim-airline`
+* **airline**:       `git clone https://github.com/vim-airline/vim-airline vim-airline`
+* **airline-themes**: `git clone https://github.com/vim-airline/vim-airline-themes vim-airline-themes`
 * **bufstop**:       `git clone https://github.com/mihaifm/bufstop.git vim-bufstop`
 * **command-t**:     `git clone https://github.com/wincent/command-t vim-command-t`
 * **FSwitch**:       `git clone https://github.com/derekwyatt/vim-fswitch.git vim-fswitch`
