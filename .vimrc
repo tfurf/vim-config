@@ -37,6 +37,10 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
 
+"vim-clang-format
+let g:clang_format#command = 'clang-format-3.6'
+let g:clang_format#detect_style_file = 1
+
 "gitgutter
 highlight clear SignColumn
 
@@ -58,16 +62,18 @@ set expandtab
 
 augroup vimrc_filetype
   autocmd!
-  autocmd FileType python call s:MyPythonSettings()    " C is same as Cpp
-  autocmd FileType c  call s:MyCppSettings()    " C is same as Cpp
-  autocmd FileType cpp call s:MyCppSettings()
-  autocmd FileType tex call s:MyTeXSettings()
+  autocmd FileType python   call s:MyPythonSettings()    " C is same as Cpp
+  autocmd FileType c        call s:MyCppSettings()    " C is same as Cpp
+  autocmd FileType cpp      call s:MyCppSettings()
+  autocmd FileType tex      call s:MyTeXSettings()
   autocmd FileType plaintex call s:MyTeXSettings()
-  autocmd FileType xml call s:MyXmlSettings()
-  autocmd FileType kml call s:MyXmlSettings()
-  autocmd FileType xslt call s:MyXmlSettings()
-  autocmd FileType mail call s:MyTextSettings()
+  autocmd FileType xml      call s:MyXmlSettings()
+  autocmd FileType kml      call s:MyXmlSettings()
+  autocmd FileType xslt     call s:MyXmlSettings()
+  autocmd FileType mail     call s:MyTextSettings()
+  autocmd FileType markdown call s:MyMarkdownSettings()
   autocmd BufRead,BufNewFile *.launch set filetype=xml
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
 augroup end
 
 function! s:MyPythonSettings()
@@ -77,6 +83,10 @@ endfunction
 function! s:MyXmlSettings()
   set syntax=xml
   let g:xml_syntax_folding=1
+endfunction
+
+function! s:MyMarkdownSettings()
+  set syntax=markdown
 endfunction
 
 function! s:MyCppSettings()
