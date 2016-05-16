@@ -19,10 +19,6 @@ set t_Co=256
 set background=dark
 colorscheme solarized
 
-"explorer mappings
-nnoremap <f1> :NERDTreeToggle<cr>
-let g:NERDTreeShowHidden = 1
-
 " Switch syntax highlighting on, when the terminal has colors
 if &t_Co > 2 || has("gui_running")
   highlight ExtraWhitespace ctermbg=red guibg=red
