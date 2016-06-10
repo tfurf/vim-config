@@ -4,6 +4,7 @@
 * **airline-themes**:   `git clone https://github.com/vim-airline/vim-airline-themes vim-airline-themes`
 * **bufstop**:          `git clone https://github.com/mihaifm/bufstop.git vim-bufstop`
 * **command-t**:        `git clone https://github.com/wincent/command-t vim-command-t`
+* **dispatch**:         `git clone https://github.com/tpope/vim-dispatch.git vim-dispatch`
 * **FSwitch**:          `git clone https://github.com/derekwyatt/vim-fswitch.git vim-fswitch`
 * **LaTeX-BoX**:        `git clone https://github.com/LaTeX-Box-Team/LaTeX-Box.git vim-latex-box`
 * **MWUtils**:          `git clone https://github.com/MarcWeber/vim-addon-mw-utils.git vim-mwutils`
