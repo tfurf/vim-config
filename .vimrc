@@ -72,6 +72,17 @@ augroup vimrc_filetype
   autocmd BufRead,BufNewFile *.md set filetype=markdown
 augroup end
 
+function! RemoveTrailingWhiteSpace()
+  let l:save_cursor = getpos('.')
+  let l:winview = winsaveview()
+  %s/\s\+$//e
+  call setpos('.', l:save_cursor)
+  call winrestview(l:winview)
+endfunction
+
+noremap <Leader>w :call RemoveTrailingWhiteSpace()<CR>
+
+
 function! s:MyPythonSettings()
   set sw=2
 endfunction
