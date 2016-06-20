@@ -1,18 +1,67 @@
 syntax on
-set sessionoptions=blank,buffers,curdir,folds,globals,help,localoptions,options,resize
+set sessionoptions=blank,buffers,globals,help,localoptions,options,resize
 set hidden
-
+set sw=2
+set ts=2
+set nu
+set smartcase
+set smarttab
+set expandtab
+set nowrap
+set ignorecase
 set nocp
-if has("autocmd")
-  filetype plugin indent on
-endif
+set foldmethod=syntax
 
-set wildmenu
 set wildmode=list:longest
 
-" Pathogen
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
+"Auto-install vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+" vim-plug
+call plug#begin()
+Plug 'LaTeX-Box-Team/LaTeX-Box'
+Plug 'Valloric/YouCompleteMe', { 'do' : './install.py' , 'for' : ['cpp' , 'python' , 'bash' ] }
+Plug 'airblade/vim-gitgutter'
+  highlight clear SignColumn
+
+Plug 'altercation/vim-colors-solarized'
+Plug 'beloglazov/vim-online-thesaurus'
+Plug 'derekwyatt/vim-fswitch'
+Plug 'derekwyatt/vim-protodef'
+Plug 'garbas/vim-snipmate'
+    \ | Plug 'MarcWeber/vim-addon-mw-utils'
+    \ | Plug 'tomtom/tlib_vim'
+Plug 'honza/vim-snippets'
+Plug 'kana/vim-operator-user'
+Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
+Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
+Plug 'rhysd/vim-clang-format'
+  let g:clang_format#command = 'clang-format-3.6'
+  let g:clang_format#detect_style_file = 1
+
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-pathogen'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-sensible'
+Plug 'vim-airline/vim-airline'
+  " airline
+  set laststatus=2
+  let g:airline_powerline_fonts = 1
+  let g:airline_theme = 'base16'
+  let g:airline#extensions#branch#enabled = 1
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#whitespace#enabled = 0
+
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-voom/VOoM', { 'for': [ 'tex' , 'plaintex' , 'txt' ] }
+Plug 'wincent/command-t', { 'do' : 'cd ruby/command-t && ruby extconf.rb && make' }
+call plug#end()
 
 "Color
 set t_Co=256
@@ -25,49 +74,13 @@ if &t_Co > 2 || has("gui_running")
   match ExtraWhitespace /\s\+$\|\t/
 endif
 
-" airline
-set laststatus=2
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'base16'
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#whitespace#enabled = 0
-
-"vim-clang-format
-let g:clang_format#command = 'clang-format-3.6'
-let g:clang_format#detect_style_file = 1
-
-"gitgutter
-highlight clear SignColumn
-
-"search selected text and replace
-vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
-
-set sw=2
-set ts=2
-set title
-set nu
-set nowrap
-set foldmethod=syntax
-set incsearch
-set ignorecase
-set smartcase
-set scrolloff=4
-set smarttab
-set expandtab
-
 augroup vimrc_filetype
   autocmd!
-  autocmd FileType python   call s:MyPythonSettings()    " C is same as Cpp
-  autocmd FileType c        call s:MyCppSettings()    " C is same as Cpp
-  autocmd FileType cpp      call s:MyCppSettings()
-  autocmd FileType tex      call s:MyTeXSettings()
-  autocmd FileType plaintex call s:MyTeXSettings()
-  autocmd FileType xml      call s:MyXmlSettings()
-  autocmd FileType kml      call s:MyXmlSettings()
-  autocmd FileType xslt     call s:MyXmlSettings()
-  autocmd FileType mail     call s:MyTextSettings()
-  autocmd FileType markdown call s:MyMarkdownSettings()
+  autocmd FileType {c,cpp}        call s:MyCppSettings()    " C is same as Cpp
+  autocmd FileType *tex           call s:MyTeXSettings()
+  autocmd FileType {xml,kml,xslt} call s:MyXmlSettings()
+  autocmd FileType mail           call s:MyTextSettings()
+  autocmd FileType markdown       call s:MyMarkdownSettings()
   autocmd BufRead,BufNewFile *.launch set filetype=xml
   autocmd BufRead,BufNewFile *.md set filetype=markdown
 augroup end
@@ -81,11 +94,6 @@ function! RemoveTrailingWhiteSpace()
 endfunction
 
 noremap <Leader>w :call RemoveTrailingWhiteSpace()<CR>
-
-
-function! s:MyPythonSettings()
-  set sw=2
-endfunction
 
 function! s:MyXmlSettings()
   set syntax=xml
@@ -104,25 +112,12 @@ function! s:MyCppSettings()
   nmap <silent> <Leader>of :FSHere<cr>
   au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
   " -- Taglist --
-  nnoremap <silent> <F8> :TlistToggle<CR>
-  let Tlist_Auto_Open = 1    " Start with taglist open.
-  let TlistAddFileAlways = 1 " Add new files to the taglist.
-  let Tlist_Enable_Fold_Column = 0 " Remove the fold columns.
-  let Tlist_File_Fold_Auto_Close = 1 " Automatically remove stale files from taglist.
-  let Tlist_Highlight_Tag_On_BufEnter = 1 " On entering buffer, highlight the current tag..
-  " --- OmniCppComplete ---
-  " -- optional --
-  " auto close options when exiting insert mode
-  set completeopt=menu,menuone,longest,preview
-  " -- configs --
-  let OmniCpp_NamespaceSearch = 2     " search namespaces in this and included files
-  let OmniCpp_GlobalScopeSearch = 2   " search namespaces in this and included files
-  let OmniCpp_MayCompleteDot = 1      " autocomplete with .
-  let OmniCpp_MayCompleteArrow = 1    " autocomplete with ->
-  let OmniCpp_MayCompleteScope = 1    " autocomplete with ::
-  let OmniCpp_SelectFirstItem = 2     " select first item (but don't insert)
-  let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e.  parameters) in popup window
-  let OmniCpp_ShowScopeInAbbr = 1 "
+  " nnoremap <silent> <F8> :TlistToggle<CR>
+  " let Tlist_Auto_Open = 1    " Start with taglist open.
+  " let TlistAddFileAlways = 1 " Add new files to the taglist.
+  " let Tlist_Enable_Fold_Column = 0 " Remove the fold columns.
+  " let Tlist_File_Fold_Auto_Close = 1 " Automatically remove stale files from taglist.
+  " let Tlist_Highlight_Tag_On_BufEnter = 1 " On entering buffer, highlight the current tag..
 endfunction
 
 function! s:MyTextSettings()
