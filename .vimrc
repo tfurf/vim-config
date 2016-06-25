@@ -24,7 +24,7 @@ endif
 " vim-plug
 call plug#begin()
 Plug 'LaTeX-Box-Team/LaTeX-Box'
-Plug 'Valloric/YouCompleteMe', { 'do' : './install.py' , 'for' : ['cpp' , 'python' , 'bash' ] }
+Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' , 'for' : ['cpp' , 'python' , 'bash' ] }
 Plug 'airblade/vim-gitgutter'
   highlight clear SignColumn
 
