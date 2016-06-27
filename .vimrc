@@ -10,16 +10,15 @@ set expandtab
 set nowrap
 set ignorecase
 set nocp
-set foldmethod=syntax
+" set foldmethod=syntax
 
 set wildmode=list:longest
 
 "Auto-install vim-plug
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
-endif
+"if empty(glob('~/.vim/autoload/plug.vim'))
+"  execute "!" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"  autocmd VimEnter * PlugInstall | source $MYVIMRC
+"endif
 
 " vim-plug
 call plug#begin()
@@ -28,7 +27,9 @@ Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' , 'for'
 Plug 'airblade/vim-gitgutter'
   highlight clear SignColumn
 
-Plug 'altercation/vim-colors-solarized'
+"Plug 'altercation/vim-colors-solarized'
+"Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'beloglazov/vim-online-thesaurus'
 Plug 'derekwyatt/vim-fswitch'
 Plug 'derekwyatt/vim-protodef'
@@ -53,7 +54,7 @@ Plug 'vim-airline/vim-airline'
   " airline
   set laststatus=2
   let g:airline_powerline_fonts = 1
-  let g:airline_theme = 'base16'
+  let g:airline_theme = 'PaperColor'
   let g:airline#extensions#branch#enabled = 1
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#whitespace#enabled = 0
@@ -66,7 +67,8 @@ call plug#end()
 "Color
 set t_Co=256
 set background=dark
-colorscheme solarized
+"colorscheme Tomorrow-Night
+colorscheme PaperColor
 
 " Switch syntax highlighting on, when the terminal has colors
 if &t_Co > 2 || has("gui_running")
