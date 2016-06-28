@@ -27,8 +27,9 @@ Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' , 'for'
 Plug 'airblade/vim-gitgutter'
   highlight clear SignColumn
 
-"Plug 'altercation/vim-colors-solarized'
-"Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'chriskempson/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'beloglazov/vim-online-thesaurus'
 Plug 'derekwyatt/vim-fswitch'
@@ -66,10 +67,13 @@ let g:CommandTFileScanner = "git"
 call plug#end()
 
 "Color
-set t_Co=256
+"set t_Co=256
 set background=dark
 "colorscheme Tomorrow-Night
-colorscheme PaperColor
+"colorscheme PaperColor
+"colorscheme solarized
+let base16colorspace=256
+colorscheme base16-default
 
 " Switch syntax highlighting on, when the terminal has colors
 if &t_Co > 2 || has("gui_running")
