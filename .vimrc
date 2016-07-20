@@ -72,8 +72,8 @@ set background=dark
 "colorscheme Tomorrow-Night
 "colorscheme PaperColor
 "colorscheme solarized
-let base16colorspace=256
-colorscheme base16-default-dark
+"let base16colorspace=256
+"colorscheme base16-default-dark
 
 " Switch syntax highlighting on, when the terminal has colors
 if &t_Co > 2 || has("gui_running")
