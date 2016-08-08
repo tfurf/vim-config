@@ -63,7 +63,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-voom/VOoM', { 'for': [ 'tex' , 'plaintex' , 'txt' ] }
 Plug 'wincent/command-t', { 'do' : 'cd ruby/command-t && ruby extconf.rb && make' }
-"let g:CommandTFileScanner = "git"
+let g:CommandTFileScanner = "git"
 call plug#end()
 
 nnoremap <silent> <Leader>c <Plug>(CommandTHistory)
