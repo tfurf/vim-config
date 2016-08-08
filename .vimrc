@@ -15,11 +15,11 @@ set nocp
 set wildmode=list:longest
 
 "Auto-install vim-plug
-"if empty(glob('~/.vim/autoload/plug.vim'))
-"  execute "!" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"  autocmd VimEnter * PlugInstall | source $MYVIMRC
-"endif
-
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
 " vim-plug
 call plug#begin()
 Plug 'LaTeX-Box-Team/LaTeX-Box'
@@ -63,17 +63,20 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-voom/VOoM', { 'for': [ 'tex' , 'plaintex' , 'txt' ] }
 Plug 'wincent/command-t', { 'do' : 'cd ruby/command-t && ruby extconf.rb && make' }
-let g:CommandTFileScanner = "git"
+"let g:CommandTFileScanner = "git"
 call plug#end()
+
+nnoremap <silent> <Leader>c <Plug>(CommandTHistory)
+nnoremap <silent> <Leader>r <Plug>(CommandTTag)
 
 "Color
 "set t_Co=256
 set background=dark
-"colorscheme Tomorrow-Night
+colorscheme Tomorrow-Night
 "colorscheme PaperColor
 "colorscheme solarized
 let base16colorspace=256
-colorscheme base16-default-dark
+"colorscheme base16-default-dark
 
 " Switch syntax highlighting on, when the terminal has colors
 if &t_Co > 2 || has("gui_running")
@@ -118,6 +121,8 @@ function! s:MyCppSettings()
   imap <C-@> <C-Space>
   nmap <silent> <Leader>of :FSHere<cr>
   au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+
+  nmap <silent> <Leader>m :Make -j7 -l8<cr>
   " -- Taglist --
   " nnoremap <silent> <F8> :TlistToggle<CR>
   " let Tlist_Auto_Open = 1    " Start with taglist open.
