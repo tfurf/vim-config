@@ -24,6 +24,7 @@ set wildmode=list:longest
 call plug#begin()
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' , 'for' : ['cpp' , 'python' , 'bash' ] }
+autocmd! User YouCompleteMe if !has('vim_starting') | call youcompleteme#Enable() | endif
 Plug 'airblade/vim-gitgutter'
   highlight clear SignColumn
 
@@ -88,6 +89,7 @@ augroup vimrc_filetype
   autocmd FileType {xml,kml,xslt} call s:MyXmlSettings()
   autocmd FileType mail           call s:MyTextSettings()
   autocmd FileType markdown       call s:MyMarkdownSettings()
+  autocmd FileType python         call s:MyPythonSettings()
   autocmd BufRead,BufNewFile *.launch set filetype=xml
   autocmd BufRead,BufNewFile *.md set filetype=markdown
 augroup end
@@ -109,6 +111,10 @@ endfunction
 
 function! s:MyMarkdownSettings()
   set syntax=markdown
+endfunction
+
+function! s:MyPythonSettings()
+  set sw=2
 endfunction
 
 function! s:MyCppSettings()
