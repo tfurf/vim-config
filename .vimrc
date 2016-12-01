@@ -112,6 +112,7 @@ endfunction
 
 function! s:MyMarkdownSettings()
   set syntax=markdown
+  set wrap
 endfunction
 
 function! s:MyCppSettings()
