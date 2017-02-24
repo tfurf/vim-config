@@ -24,6 +24,8 @@ endif
 call plug#begin()
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' , 'for' : ['cpp' , 'python' , 'bash' ] }
+  let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+  let g:ycm_always_populate_location_list = 1
 Plug 'airblade/vim-gitgutter'
   highlight clear SignColumn
 
@@ -39,6 +41,10 @@ Plug 'garbas/vim-snipmate'
     \ | Plug 'tomtom/tlib_vim'
 Plug 'honza/vim-snippets'
 Plug 'kana/vim-operator-user'
+Plug 'junegunn/vim-easy-align'
+  xmap ga <Plug>(EasyAlign)
+  nmap ga <Plug>(EasyAlign)
+
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 Plug 'rhysd/vim-clang-format'
@@ -55,7 +61,7 @@ Plug 'vim-airline/vim-airline'
   " airline
   set laststatus=2
   let g:airline_powerline_fonts = 1
-  let g:airline_theme = 'PaperColor'
+  let g:airline_theme = 'papercolor'
   let g:airline#extensions#branch#enabled = 1
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#whitespace#enabled = 0
@@ -64,6 +70,14 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-voom/VOoM', { 'for': [ 'tex' , 'plaintex' , 'txt' ] }
 Plug 'wincent/command-t', { 'do' : 'cd ruby/command-t && ruby extconf.rb && make' }
 let g:CommandTFileScanner = "git"
+
+// Plug 'jeaye/color_coded', { 'do' : 'cmake . && make && make install' , 'for': ['c', 'cpp'] }
+
+Plug 'chrisbra/vim-diff-enhanced'
+  if &diff
+    let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
+  endif
+
 call plug#end()
 
 nnoremap <silent> <Leader>c <Plug>(CommandTHistory)
@@ -91,6 +105,7 @@ augroup vimrc_filetype
   autocmd FileType {xml,kml,xslt} call s:MyXmlSettings()
   autocmd FileType mail           call s:MyTextSettings()
   autocmd FileType markdown       call s:MyMarkdownSettings()
+  autocmd FileType python         call s:MyPythonSettings()
   autocmd BufRead,BufNewFile *.launch set filetype=xml
   autocmd BufRead,BufNewFile *.md set filetype=markdown
 augroup end
@@ -104,6 +119,12 @@ function! RemoveTrailingWhiteSpace()
 endfunction
 
 noremap <Leader>w :call RemoveTrailingWhiteSpace()<CR>
+
+function! s:MyPythonSettings()
+  set syntax=python
+  set sw=2
+  set ts=2
+endfunction
 
 function! s:MyXmlSettings()
   set syntax=xml
