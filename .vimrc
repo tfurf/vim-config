@@ -71,7 +71,7 @@ Plug 'vim-voom/VOoM', { 'for': [ 'tex' , 'plaintex' , 'txt' ] }
 Plug 'wincent/command-t', { 'do' : 'cd ruby/command-t && ruby extconf.rb && make' }
 let g:CommandTFileScanner = "git"
 
-// Plug 'jeaye/color_coded', { 'do' : 'cmake . && make && make install' , 'for': ['c', 'cpp'] }
+" Plug 'jeaye/color_coded', { 'do' : 'cmake . && make && make install' , 'for': ['c', 'cpp'] }
 
 Plug 'chrisbra/vim-diff-enhanced'
   if &diff
