@@ -27,16 +27,17 @@ Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' , 'for'
 Plug 'airblade/vim-gitgutter'
   highlight clear SignColumn
 
-Plug 'altercation/vim-colors-solarized'
-Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'chriskempson/base16-vim'
+"Plug 'altercation/vim-colors-solarized'
+"Plug 'chriskempson/vim-tomorrow-theme'
+"Plug 'chriskempson/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'beloglazov/vim-online-thesaurus'
 Plug 'derekwyatt/vim-fswitch'
 Plug 'derekwyatt/vim-protodef'
-Plug 'garbas/vim-snipmate'
-    \ | Plug 'MarcWeber/vim-addon-mw-utils'
-    \ | Plug 'tomtom/tlib_vim'
+Plug 'SirVer/ultisnips'
+  let g:UltiSnipsExpandTrigger="<s-tab>"
+  let g:UltiSnipsJumpForwardTrigger="<c-b>"
+  let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 Plug 'honza/vim-snippets'
 Plug 'kana/vim-operator-user'
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
@@ -55,12 +56,12 @@ Plug 'vim-airline/vim-airline'
   " airline
   set laststatus=2
   let g:airline_powerline_fonts = 1
-  let g:airline_theme = 'PaperColor'
   let g:airline#extensions#branch#enabled = 1
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#whitespace#enabled = 0
 
 Plug 'vim-airline/vim-airline-themes'
+  let g:airline_theme = 'papercolor'
 Plug 'vim-voom/VOoM', { 'for': [ 'tex' , 'plaintex' , 'txt' ] }
 Plug 'wincent/command-t', { 'do' : 'cd ruby/command-t && ruby extconf.rb && make' }
 let g:CommandTFileScanner = "git"
@@ -72,8 +73,8 @@ nnoremap <silent> <Leader>r <Plug>(CommandTTag)
 "Color
 "set t_Co=256
 set background=dark
-colorscheme Tomorrow-Night
-"colorscheme PaperColor
+"colorscheme Tomorrow-Night
+colorscheme PaperColor
 "colorscheme solarized
 let base16colorspace=256
 "colorscheme base16-default-dark
