@@ -26,6 +26,7 @@ Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' , 'for' : ['cpp' , 'python' , 'bash' ] }
   let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
   let g:ycm_always_populate_location_list = 1
+  autocmd! User YouCompleteMe if !has('vim_starting') | call youcompleteme#Enable() | endif
 Plug 'airblade/vim-gitgutter'
   highlight clear SignColumn
 
@@ -62,7 +63,6 @@ Plug 'vim-airline/vim-airline'
   " airline
   set laststatus=2
   let g:airline_powerline_fonts = 1
-  let g:airline_theme = 'papercolor'
   let g:airline#extensions#branch#enabled = 1
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#whitespace#enabled = 0
@@ -88,10 +88,8 @@ nnoremap <silent> <Leader>r <Plug>(CommandTTag)
 "Color
 "set t_Co=256
 set background=dark
-"colorscheme Tomorrow-Night
 colorscheme PaperColor
-"colorscheme solarized
-let base16colorspace=256
+"let base16colorspace=256
 "colorscheme base16-default-dark
 
 " Switch syntax highlighting on, when the terminal has colors
@@ -136,6 +134,10 @@ endfunction
 function! s:MyMarkdownSettings()
   set syntax=markdown
   set wrap
+endfunction
+
+function! s:MyPythonSettings()
+  set sw=2
 endfunction
 
 function! s:MyCppSettings()
