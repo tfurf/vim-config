@@ -58,7 +58,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-pathogen'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-sensible'
+if !has('nvim')
+  Plug 'tpope/vim-sensible'
+endif
 Plug 'vim-airline/vim-airline'
   " airline
   set laststatus=2
@@ -70,20 +72,30 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
   let g:airline_theme = 'papercolor'
 Plug 'vim-voom/VOoM', { 'for': [ 'tex' , 'plaintex' , 'txt' ] }
-Plug 'wincent/command-t', { 'do' : 'cd ruby/command-t && ruby extconf.rb && make' }
-let g:CommandTFileScanner = "git"
+" Plug 'wincent/command-t', { 'do' : 'cd ruby/command-t && ruby extconf.rb && make' }
+" let g:CommandTFileScanner = "git"
+
+Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all' }
+Plug 'junegunn/fzf.vim'
+let g:fzf_layout = { 'window': 'enew' }
+
+nmap <Leader><t> <plug>(fzf-maps-n)
+xmap <Leader><t> <plug>(fzf-maps-x)
+omap <Leader><t> <plug>(fzf-maps-o)
 
 " Plug 'jeaye/color_coded', { 'do' : 'cmake . && make && make install' , 'for': ['c', 'cpp'] }
 
+if has('nvim')
 Plug 'chrisbra/vim-diff-enhanced'
   if &diff
     let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
   endif
+endif
 
 call plug#end()
 
-nnoremap <silent> <Leader>c <Plug>(CommandTHistory)
-nnoremap <silent> <Leader>r <Plug>(CommandTTag)
+" nnoremap <silent> <Leader>c <Plug>(CommandTHistory)
+" innoremap <silent> <Leader>r <Plug>(CommandTTag)
 
 "Color
 "set t_Co=256
