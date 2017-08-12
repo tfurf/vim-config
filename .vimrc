@@ -1,4 +1,6 @@
 syntax on
+
+
 set sessionoptions=blank,buffers,globals,help,localoptions,options,resize
 set hidden
 set sw=2
@@ -24,9 +26,14 @@ endif
 call plug#begin()
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' , 'for' : ['cpp' , 'python' , 'bash' ] }
-  let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+"  let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
   let g:ycm_always_populate_location_list = 1
+  nnoremap <Leader>yg :YcmCompleter GoTo<CR>
+  nnoremap <Leader>yf :YcmCompleter FixIt<CR>
+  nnoremap <Leader>yd :YcmShowDetailedDiagnostic<CR>
+  nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
   autocmd! User YouCompleteMe if !has('vim_starting') | call youcompleteme#Enable() | endif
+
 Plug 'airblade/vim-gitgutter'
   highlight clear SignColumn
 
@@ -34,14 +41,14 @@ Plug 'airblade/vim-gitgutter'
 "Plug 'chriskempson/vim-tomorrow-theme'
 "Plug 'chriskempson/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'beloglazov/vim-online-thesaurus'
+"Plug 'beloglazov/vim-online-thesaurus'
 Plug 'derekwyatt/vim-fswitch'
-Plug 'derekwyatt/vim-protodef'
-Plug 'SirVer/ultisnips'
-  let g:UltiSnipsExpandTrigger="<s-tab>"
-  let g:UltiSnipsJumpForwardTrigger="<c-b>"
-  let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-Plug 'honza/vim-snippets'
+"Plug 'derekwyatt/vim-protodef'
+"Plug 'SirVer/ultisnips'
+"  let g:UltiSnipsExpandTrigger="<s-tab>"
+"  let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"  let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"Plug 'honza/vim-snippets'
 Plug 'kana/vim-operator-user'
 Plug 'junegunn/vim-easy-align'
   xmap ga <Plug>(EasyAlign)
@@ -50,12 +57,11 @@ Plug 'junegunn/vim-easy-align'
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 Plug 'rhysd/vim-clang-format'
-  let g:clang_format#command = 'clang-format-3.6'
+"  let g:clang_format#command = 'clang-format-4.6'
   let g:clang_format#detect_style_file = 1
 
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-pathogen'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 if !has('nvim')
@@ -71,7 +77,7 @@ Plug 'vim-airline/vim-airline'
 
 Plug 'vim-airline/vim-airline-themes'
   let g:airline_theme = 'papercolor'
-Plug 'vim-voom/VOoM', { 'for': [ 'tex' , 'plaintex' , 'txt' ] }
+" Plug 'vim-voom/VOoM', { 'for': [ 'tex' , 'plaintex' , 'txt' ] }
 " Plug 'wincent/command-t', { 'do' : 'cd ruby/command-t && ruby extconf.rb && make' }
 " let g:CommandTFileScanner = "git"
 
@@ -79,9 +85,13 @@ Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all' }
 Plug 'junegunn/fzf.vim'
 let g:fzf_layout = { 'window': 'enew' }
 
-nmap <Leader><t> <plug>(fzf-maps-n)
-xmap <Leader><t> <plug>(fzf-maps-x)
-omap <Leader><t> <plug>(fzf-maps-o)
+nmap <Leader>t :Files<cr>
+nmap <Leader>g :GFiles<cr>
+nmap <Leader>b :Buffers<cr>
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Plug 'jeaye/color_coded', { 'do' : 'cmake . && make && make install' , 'for': ['c', 'cpp'] }
 
@@ -93,9 +103,6 @@ Plug 'chrisbra/vim-diff-enhanced'
 endif
 
 call plug#end()
-
-" nnoremap <silent> <Leader>c <Plug>(CommandTHistory)
-" innoremap <silent> <Leader>r <Plug>(CommandTTag)
 
 "Color
 "set t_Co=256

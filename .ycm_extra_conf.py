@@ -64,7 +64,8 @@ try:
   f.write("gitroot is {}\n".format(gitroot))
   CONFIG = os.getenv("CONFIG")
   f.write("CONFIG is {}\n".format(CONFIG))
-  compilation_database_folder = os.path.join( gitroot , "build-" + CONFIG )
+  if CONFIG:
+    compilation_database_folder = os.path.join( gitroot , "build-" + CONFIG )
 except Exception as e:
   f.write("Couldn't resolve path, exception: {}".format( e.what()) )
 
