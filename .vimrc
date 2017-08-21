@@ -1,6 +1,5 @@
 syntax on
 
-
 set sessionoptions=blank,buffers,globals,help,localoptions,options,resize
 set hidden
 set sw=2
@@ -16,6 +15,10 @@ set nocp
 
 set wildmode=list:longest
 
+if has('nvim')
+  set guicursor=
+endif
+
 "Auto-install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -24,7 +27,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 " vim-plug
 call plug#begin()
-Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' , 'for' : ['cpp' , 'python' , 'bash' ] }
   let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
   let g:ycm_always_populate_location_list = 1
@@ -67,6 +69,12 @@ Plug 'tpope/vim-unimpaired'
 if !has('nvim')
   Plug 'tpope/vim-sensible'
 endif
+
+" Pending powerline supporting neovim
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
+
 Plug 'vim-airline/vim-airline'
   " airline
   set laststatus=2
@@ -78,8 +86,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
   let g:airline_theme = 'papercolor'
 
-Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug '$HOME/.fzf' | Plug 'junegunn/fzf.vim'
 let g:fzf_layout = { 'window': 'enew' }
 
 nmap <Leader>t :Files<cr>
@@ -89,8 +96,6 @@ imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file)
 imap <c-x><c-l> <plug>(fzf-complete-line)
-
-" Plug 'jeaye/color_coded', { 'do' : 'cmake . && make && make install' , 'for': ['c', 'cpp'] }
 
 if has('nvim')
 Plug 'chrisbra/vim-diff-enhanced'
@@ -165,13 +170,6 @@ function! s:MyCppSettings()
   au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
   nmap <silent> <Leader>m :Make -j7 -l8<cr>
-  " -- Taglist --
-  " nnoremap <silent> <F8> :TlistToggle<CR>
-  " let Tlist_Auto_Open = 1    " Start with taglist open.
-  " let TlistAddFileAlways = 1 " Add new files to the taglist.
-  " let Tlist_Enable_Fold_Column = 0 " Remove the fold columns.
-  " let Tlist_File_Fold_Auto_Close = 1 " Automatically remove stale files from taglist.
-  " let Tlist_Highlight_Tag_On_BufEnter = 1 " On entering buffer, highlight the current tag..
 endfunction
 
 function! s:MyTextSettings()
@@ -196,8 +194,6 @@ function! s:MyTeXSettings()
   vmap <buffer> <F7> <Plug>LatexWrapSelection
   vmap <buffer> <S-F7> <Plug>LatexEnvWrapSelection
   imap <buffer> (( \eqref{
-  "let g:LatexBox_latexmk_async=0
-  let g:LatexBox_latexmk_preview_continuously=1
   " Reformat paragraph.
   map <S-F12> gqip
   " For inline verbose:
