@@ -26,7 +26,7 @@ endif
 call plug#begin()
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' , 'for' : ['cpp' , 'python' , 'bash' ] }
-"  let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+  let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
   let g:ycm_always_populate_location_list = 1
   nnoremap <Leader>yg :YcmCompleter GoTo<CR>
   nnoremap <Leader>yf :YcmCompleter FixIt<CR>
@@ -42,7 +42,7 @@ Plug 'airblade/vim-gitgutter'
 "Plug 'chriskempson/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
 "Plug 'beloglazov/vim-online-thesaurus'
-Plug 'derekwyatt/vim-fswitch'
+"Plug 'derekwyatt/vim-fswitch'
 "Plug 'derekwyatt/vim-protodef'
 "Plug 'SirVer/ultisnips'
 "  let g:UltiSnipsExpandTrigger="<s-tab>"
@@ -77,9 +77,6 @@ Plug 'vim-airline/vim-airline'
 
 Plug 'vim-airline/vim-airline-themes'
   let g:airline_theme = 'papercolor'
-" Plug 'vim-voom/VOoM', { 'for': [ 'tex' , 'plaintex' , 'txt' ] }
-" Plug 'wincent/command-t', { 'do' : 'cd ruby/command-t && ruby extconf.rb && make' }
-" let g:CommandTFileScanner = "git"
 
 Plug 'junegunn/fzf', { 'dir' : '~/.fzf', 'do' : './install --all' }
 Plug 'junegunn/fzf.vim'
