@@ -1,6 +1,5 @@
 syntax on
 
-
 set sessionoptions=blank,buffers,globals,help,localoptions,options,resize
 set hidden
 set sw=2
@@ -67,6 +66,8 @@ Plug 'tpope/vim-unimpaired'
 if !has('nvim')
   Plug 'tpope/vim-sensible'
 endif
+Plug 'tpope/tpope-vim-abolish'
+
 Plug 'vim-airline/vim-airline'
   " airline
   set laststatus=2
@@ -89,8 +90,6 @@ imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file)
 imap <c-x><c-l> <plug>(fzf-complete-line)
-
-" Plug 'jeaye/color_coded', { 'do' : 'cmake . && make && make install' , 'for': ['c', 'cpp'] }
 
 if has('nvim')
 Plug 'chrisbra/vim-diff-enhanced'
