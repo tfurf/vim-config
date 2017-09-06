@@ -69,6 +69,8 @@ Plug 'tpope/vim-unimpaired'
 if !has('nvim')
   Plug 'tpope/vim-sensible'
 endif
+Plug 'tpope/tpope-vim-abolish'
+Plug 'tpope/vim-repeat'
 
 " Pending powerline supporting neovim
 "python from powerline.vim import setup as powerline_setup
