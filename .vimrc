@@ -15,6 +15,10 @@ set nocp
 
 set wildmode=list:longest
 
+if has('nvim')
+  set guicursor=
+endif
+
 "Auto-install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
