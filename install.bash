@@ -20,3 +20,5 @@ for f in ${t}; do
     ln -vsT ${CWD}/${f} ~/${f} ;
   }
 done;
+
+ln  -vsT .vimrc ~/.config/nvim/init.vim
