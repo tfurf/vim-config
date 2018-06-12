@@ -67,7 +67,7 @@ try:
   if CONFIG:
     compilation_database_folder = os.path.join( gitroot , "build-" + CONFIG )
 except Exception as e:
-  f.write("Couldn't resolve path, exception: {}".format( e.what()) )
+  f.write("Couldn't resolve path, exception: {}\n".format( e ) )
 
 f.write("Database folder set to {}.\n".format( compilation_database_folder ))
 f.flush()

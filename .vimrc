@@ -43,6 +43,7 @@ Plug 'airblade/vim-gitgutter'
 "Plug 'chriskempson/vim-tomorrow-theme'
 "Plug 'chriskempson/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'sbdchd/neoformat'
 "Plug 'beloglazov/vim-online-thesaurus'
 "Plug 'derekwyatt/vim-fswitch'
 "Plug 'derekwyatt/vim-protodef'
@@ -71,6 +72,7 @@ if !has('nvim')
 endif
 Plug 'tpope/tpope-vim-abolish'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
 
 Plug 'vim-airline/vim-airline'
   " airline
