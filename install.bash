@@ -21,4 +21,4 @@ for f in ${t}; do
   }
 done;
 
-ln  -vsT .vimrc ~/.config/nvim/init.vim
+ln  -vs  $CWD ~/.config/nvim
