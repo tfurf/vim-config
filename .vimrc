@@ -36,6 +36,8 @@ Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' , 'for'
   nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
   autocmd! User YouCompleteMe if !has('vim_starting') | call youcompleteme#Enable() | endif
 
+Plug 'ryanoasis/vim-devicons'
+
 Plug 'airblade/vim-gitgutter'
   highlight clear SignColumn
 
