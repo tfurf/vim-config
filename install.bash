@@ -21,5 +21,8 @@ for f in ${t}; do
   }
 done;
 
+[[ ${force} == "yes" ]] && rm -rv ~/.config/nvim ;
 ln -vsT $CWD ~/.config/nvim
+
+[[ ${force} == "yes" ]] && rm -v $CWD/init.vim ;
 ln -vs $CWD/.vimrc $CWD/init.vim
