@@ -2,8 +2,8 @@ syntax on
 
 set sessionoptions=blank,buffers,globals,help,localoptions,options,resize
 set hidden
-set sw=2
-set ts=2
+set sw=4
+set ts=4
 set nu
 set smartcase
 set smarttab
