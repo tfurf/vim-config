@@ -94,6 +94,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug '$HOME/.fzf' | Plug 'junegunn/fzf.vim'
 let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_preview_window = [ 'down:40%' ]
 
 nmap <Leader>t :Files<cr>
 nmap <Leader>g :GFiles<cr>
