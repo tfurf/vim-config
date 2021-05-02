@@ -2,8 +2,8 @@ syntax on
 
 set sessionoptions=blank,buffers,globals,help,localoptions,options,resize
 set hidden
-set sw=2
-set ts=2
+set sw=4
+set ts=4
 set nu
 set smartcase
 set smarttab
@@ -44,7 +44,7 @@ Plug 'airblade/vim-gitgutter'
 "Plug 'altercation/vim-colors-solarized'
 "Plug 'chriskempson/vim-tomorrow-theme'
 "Plug 'chriskempson/base16-vim'
-Plug 'NLKNguyen/papercolor-theme'
+"Plug 'NLKNguyen/papercolor-theme'
 Plug 'sbdchd/neoformat'
 "Plug 'beloglazov/vim-online-thesaurus'
 "Plug 'derekwyatt/vim-fswitch'
@@ -58,6 +58,11 @@ Plug 'kana/vim-operator-user'
 Plug 'junegunn/vim-easy-align'
   xmap ga <Plug>(EasyAlign)
   nmap ga <Plug>(EasyAlign)
+
+Plug 'sainnhe/gruvbox-material'
+
+" Plug 'nvim-treesitter/nvim-treesitter'
+
 
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
@@ -85,14 +90,16 @@ Plug 'vim-airline/vim-airline'
   let g:airline#extensions#whitespace#enabled = 0
 
 Plug 'vim-airline/vim-airline-themes'
-  let g:airline_theme = 'papercolor'
+  let g:airline_theme = 'gruvbox_material'
 
 Plug '$HOME/.fzf' | Plug 'junegunn/fzf.vim'
-let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_preview_window = [ 'down:40%' ]
 
 nmap <Leader>t :Files<cr>
 nmap <Leader>g :GFiles<cr>
 nmap <Leader>b :Buffers<cr>
+nmap <Leader>a :Ag<cr>
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file)
@@ -110,7 +117,7 @@ call plug#end()
 "Color
 "set t_Co=256
 set background=dark
-colorscheme PaperColor
+colorscheme gruvbox-material
 "let base16colorspace=256
 "colorscheme base16-default-dark
 
@@ -159,7 +166,6 @@ function! s:MyMarkdownSettings()
 endfunction
 
 function! s:MyPythonSettings()
-  set sw=2
 endfunction
 
 function! s:MyCppSettings()
