@@ -41,6 +41,9 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
   highlight clear SignColumn
 
+Plug 'psf/black', { 'branch' : 'stable' , 'for': ['python'] }
+  nnoremap <F6> :Black<CR>
+Plug 'nvie/vim-flake8'
 "Plug 'altercation/vim-colors-solarized'
 "Plug 'chriskempson/vim-tomorrow-theme'
 "Plug 'chriskempson/base16-vim'
