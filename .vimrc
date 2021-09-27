@@ -18,7 +18,7 @@ set wildmode=list:longest
 if has('nvim')
   set guicursor=
 endif
-
+let g:python3_host_prog = '/usr/bin/python3.8'
 "Auto-install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -27,14 +27,27 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 " vim-plug
 call plug#begin()
-Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' , 'for' : ['cpp' , 'python' , 'bash' ] }
-  let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-  let g:ycm_always_populate_location_list = 1
-  nnoremap <Leader>yg :YcmCompleter GoTo<CR>
-  nnoremap <Leader>yf :YcmCompleter FixIt<CR>
-  nnoremap <Leader>yd :YcmShowDetailedDiagnostic<CR>
-  nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
-  autocmd! User YouCompleteMe if !has('vim_starting') | call youcompleteme#Enable() | endif
+"  let g:plug_url_format = 'http://gitlab.scinet.cmre.nato.int/external/github.com/%s.git'
+"Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' , 'for' : ['cpp' , 'python' , 'bash' ] }
+" let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+" let g:ycm_always_populate_location_list = 1
+" nnoremap <Leader>yg :YcmCompleter GoTo<CR>
+" nnoremap <Leader>yf :YcmCompleter FixIt<CR>
+" nnoremap <Leader>yd :YcmShowDetailedDiagnostic<CR>
+" nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+" autocmd! User YouCompleteMe if !has('vim_starting') | call youcompleteme#Enable() | endif
+"
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 Plug 'ryanoasis/vim-devicons'
 
