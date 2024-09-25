@@ -95,6 +95,21 @@ Plug 'junegunn/vim-easy-align'
   nmap ga <Plug>(EasyAlign)
 
 Plug 'sainnhe/gruvbox-material'
+Plug 'sainnhe/everforest'
+
+" For light version.
+set background=light
+
+" Set contrast.
+" This configuration option should be placed before `colorscheme everforest`.
+" Available values: 'hard', 'medium'(default), 'soft'
+let g:everforest_background = 'medium'
+
+" For better performance
+let g:everforest_better_performance = 1
+
+colorscheme everforest
+
 
 " Plug 'nvim-treesitter/nvim-treesitter'
 
@@ -125,9 +140,10 @@ Plug 'vim-airline/vim-airline'
   let g:airline#extensions#whitespace#enabled = 0
 
 Plug 'vim-airline/vim-airline-themes'
-  let g:airline_theme = 'gruvbox_material'
+  let g:airline_theme = 'everforest'
 
-Plug '$HOME/.fzf' | Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_preview_window = [ 'down:40%' ]
 
@@ -152,7 +168,7 @@ call plug#end()
 "Color
 "set t_Co=256
 set background=dark
-colorscheme gruvbox-material
+" colorscheme everforest " gruvbox-material
 "let base16colorspace=256
 "colorscheme base16-default-dark
 
