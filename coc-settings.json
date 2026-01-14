@@ -5,5 +5,6 @@
     "coc.preferences.formatOnSaveFiletypes": [
         "python",
         "json"
-    ]
+    ],
+    "coc.preferences.formatOnSave": true
 }

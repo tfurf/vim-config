@@ -102,12 +102,23 @@ Plug 'junegunn/vim-easy-align'
   nmap ga <Plug>(EasyAlign)
 
 Plug 'sainnhe/gruvbox-material'
+Plug 'sainnhe/everforest'
+
+"   " For light version.
+"   set background=light
+
+"   " Set contrast.
+"   " This configuration option should be placed before `colorscheme everforest`.
+"   " Available values: 'hard', 'medium'(default), 'soft'
+"   let g:everforest_background = 'medium'
+
+"   " For better performance
+"   let g:everforest_better_performance = 1
+
+"   colorscheme everforest
+
 Plug 'nvim-tree/nvim-tree.lua'
 nmap <Leader>e :NvimTreeFocus<cr>
-
-
-" Plug 'nvim-treesitter/nvim-treesitter'
-
 
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
@@ -136,8 +147,10 @@ Plug 'vim-airline/vim-airline'
   let g:airline#extensions#whitespace#enabled = 0
 
 Plug 'vim-airline/vim-airline-themes'
+  let g:airline_theme = 'everforest'
 
-Plug '$HOME/.fzf' | Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_preview_window = [ 'down:40%' ]
 
@@ -161,11 +174,19 @@ call plug#end()
 
 "Color
 "set t_Co=256
+"
 set background=light
 let g:airline_theme = 'papercolor'
 let base16colorspace=256
+
 "colorscheme gruvbox-material
+"
 colorscheme kanagawa
+
+" set background=dark
+" colorscheme everforest " gruvbox-material
+"let base16colorspace=256
+"colorscheme base16-default-dark
 
 " Switch syntax highlighting on, when the terminal has colors
 if &t_Co > 2 || has("gui_running")
