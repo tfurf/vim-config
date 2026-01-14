@@ -1,4 +1,5 @@
 syntax on
+set encoding=utf-8
 
 set sessionoptions=blank,buffers,globals,help,localoptions,options,resize
 set hidden
@@ -37,6 +38,12 @@ call plug#begin()
 " nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 " autocmd! User YouCompleteMe if !has('vim_starting') | call youcompleteme#Enable() | endif
 "
+
+Plug 'rebelot/kanagawa.nvim'
+
+Plug 'neovim/nvim-lspconfig'
+Plug 'uloco/bluloco.nvim'
+            \| Plug 'rktjmp/lush.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -73,13 +80,13 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
   highlight clear SignColumn
 
-Plug 'psf/black', { 'branch' : 'stable' , 'for': ['python'] }
+"Plug 'psf/black', { 'branch' : 'stable' , 'for': ['python'] }
   nnoremap <F6> :Black<CR>
 Plug 'nvie/vim-flake8'
 "Plug 'altercation/vim-colors-solarized'
 "Plug 'chriskempson/vim-tomorrow-theme'
-"Plug 'chriskempson/base16-vim'
-"Plug 'NLKNguyen/papercolor-theme'
+Plug 'chriskempson/base16-vim'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'sbdchd/neoformat'
 "Plug 'beloglazov/vim-online-thesaurus'
 "Plug 'derekwyatt/vim-fswitch'
@@ -95,6 +102,9 @@ Plug 'junegunn/vim-easy-align'
   nmap ga <Plug>(EasyAlign)
 
 Plug 'sainnhe/gruvbox-material'
+Plug 'nvim-tree/nvim-tree.lua'
+nmap <Leader>e :NvimTreeFocus<cr>
+
 
 " Plug 'nvim-treesitter/nvim-treesitter'
 
@@ -105,6 +115,7 @@ Plug 'rhysd/vim-clang-format'
 "  let g:clang_format#command = 'clang-format-4.6'
   let g:clang_format#detect_style_file = 1
 
+Plug 'lervag/vimtex'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -125,7 +136,6 @@ Plug 'vim-airline/vim-airline'
   let g:airline#extensions#whitespace#enabled = 0
 
 Plug 'vim-airline/vim-airline-themes'
-  let g:airline_theme = 'gruvbox_material'
 
 Plug '$HOME/.fzf' | Plug 'junegunn/fzf.vim'
 let g:fzf_layout = { 'down': '~40%' }
@@ -151,10 +161,11 @@ call plug#end()
 
 "Color
 "set t_Co=256
-set background=dark
-colorscheme gruvbox-material
-"let base16colorspace=256
-"colorscheme base16-default-dark
+set background=light
+let g:airline_theme = 'papercolor'
+let base16colorspace=256
+"colorscheme gruvbox-material
+colorscheme kanagawa
 
 " Switch syntax highlighting on, when the terminal has colors
 if &t_Co > 2 || has("gui_running")
@@ -198,6 +209,8 @@ endfunction
 function! s:MyMarkdownSettings()
   set syntax=markdown
   set wrap
+  set sw=2
+  set ts=2
 endfunction
 
 function! s:MyPythonSettings()
@@ -228,17 +241,8 @@ function! s:MyTeXSettings()
   set wm=0
   set spell
   setlocal spell spelllang=en_gb
-  " For latex-box
-  map <S-F9> <C-X><C-O>
-  map <buffer> [[ \begin{
-  imap <buffer> ]] <Plug>LatexCloseCurEnv
-  nmap <buffer> <F5> <Plug>LatexChangeEnv
-  vmap <buffer> <F7> <Plug>LatexWrapSelection
-  vmap <buffer> <S-F7> <Plug>LatexEnvWrapSelection
-  imap <buffer> (( \eqref{
-  " Reformat paragraph.
-  map <S-F12> gqip
   " For inline verbose:
   let g:surround_61 = "\\verb=\r="
   let g:surround_45 = "\$\r=i\$"
+  syntax enable
 endfunction
