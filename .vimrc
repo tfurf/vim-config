@@ -39,6 +39,7 @@ call plug#begin()
 " autocmd! User YouCompleteMe if !has('vim_starting') | call youcompleteme#Enable() | endif
 "
 
+Plug 'olimorris/codecompanion.nvim'
 Plug 'rebelot/kanagawa.nvim'
 
 Plug 'neovim/nvim-lspconfig'
