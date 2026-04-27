@@ -1,4 +1,5 @@
-plugged/
 *swp
 .netrwhist
-init.vim
+
+# lazy.nvim lock file — commit this to pin plugin versions, or ignore to always use latest
+# lazy-lock.json

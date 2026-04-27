@@ -83,6 +83,9 @@ _G.lsp_on_attach = function(_client, bufnr)
   map("n", "<C-k>",       vim.lsp.buf.signature_help,   "Signature help")
 end
 
+-- Apply on_attach to every server globally (Neovim 0.11 native API)
+vim.lsp.config('*', { on_attach = _G.lsp_on_attach })
+
 -- -----------------------------------------------------------------------------
 -- 4. FORMAT-ON-SAVE AUTOCMD
 -- -----------------------------------------------------------------------------
@@ -325,29 +328,36 @@ require("lazy").setup({
           "clangd",
           "texlab",
         },
+        -- Use vim.lsp.enable() per server (Neovim 0.11 native API).
+        -- on_attach and capabilities are set globally via vim.lsp.config('*', ...).
         handlers = {
-          -- Default handler: set up every installed server with on_attach
           function(server_name)
-            require("lspconfig")[server_name].setup({
-              on_attach = _G.lsp_on_attach,
-            })
+            vim.lsp.enable(server_name)
           end,
-
-          -- clangd: detect .clang-format style file (replaces vim-clang-format)
-          clangd = function()
-            require("lspconfig").clangd.setup({
-              on_attach = _G.lsp_on_attach,
-              cmd = {
-                "clangd",
-                "--clang-tidy",
-                "--background-index",
-                "--suggest-missing-includes",
-              },
-            })
-          end,
-
         },
       })
+
+      -- clangd: extra compiler analysis flags
+      vim.lsp.config('clangd', {
+        cmd = { "clangd", "--clang-tidy", "--background-index", "--suggest-missing-includes" },
+      })
+
+      -- ruff and cmake-language-server are NOT in ensure_installed because
+      -- they are installed via `uv tool` (not Mason/npm/pip).
+      -- Install: uv tool install ruff && uv tool install cmake-language-server
+      if vim.fn.executable("ruff") == 1 then
+        vim.lsp.config('ruff', {
+          on_attach = function(client, bufnr)
+            -- pyright handles hover; ruff is lint/format only
+            client.server_capabilities.hoverProvider = false
+            _G.lsp_on_attach(client, bufnr)
+          end,
+        })
+        vim.lsp.enable('ruff')
+      end
+      if vim.fn.executable("cmake-language-server") == 1 then
+        vim.lsp.enable('cmake')
+      end
     end,
   },
 
@@ -427,13 +437,10 @@ require("lazy").setup({
         }),
       })
 
-      -- Extend LSP capabilities to advertise nvim-cmp support
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      require("lspconfig").util.default_config.capabilities = vim.tbl_deep_extend(
-        "force",
-        require("lspconfig").util.default_config.capabilities or {},
-        capabilities
-      )
+      -- Advertise nvim-cmp completion capabilities to every LSP server
+      vim.lsp.config('*', {
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+      })
     end,
   },
 
@@ -462,34 +469,7 @@ require("lazy").setup({
 })
 
 -- -----------------------------------------------------------------------------
--- 6. UV-MANAGED LSP SERVERS
--- -----------------------------------------------------------------------------
--- ruff and cmake-language-server are installed via uv (not Mason) because
--- Mason requires `python3 -m pip` which is not available system-wide.
---
--- Install/update with:
---   uv tool install ruff
---   uv tool install cmake-language-server
---
--- Both land in ~/.local/bin (or wherever `uv tool` puts binaries) which must
--- be on your PATH. After installing, these servers start automatically when
--- you open a Python or CMakeLists.txt file.
-
--- ruff: formatter/linter; disable hover so pyright handles K lookups
-require("lspconfig").ruff.setup({
-  on_attach = function(client, bufnr)
-    client.server_capabilities.hoverProvider = false
-    _G.lsp_on_attach(client, bufnr)
-  end,
-})
-
--- cmake-language-server
-require("lspconfig").cmake.setup({
-  on_attach = _G.lsp_on_attach,
-})
-
--- -----------------------------------------------------------------------------
--- 7. HARPER-LS
+-- 6. HARPER-LS
 -- -----------------------------------------------------------------------------
 vim.lsp.enable("harper-ls")
 
