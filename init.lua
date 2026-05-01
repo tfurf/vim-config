@@ -171,8 +171,9 @@ require("lazy").setup({
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
-      { "<Leader>e", "<cmd>NvimTreeFocus<cr>", desc = "Focus file tree" },
+      { "<Leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle file tree" },
     },
+    cmd = { "NvimTreeToggle", "NvimTreeOpen" },
     opts = {},
   },
 
@@ -218,6 +219,37 @@ require("lazy").setup({
     config = function()
       vim.g.fzf_layout         = { down = "~40%" }
       vim.g.fzf_preview_window = { "down:40%" }
+    end,
+  },
+
+  -- -------------------------------------------------------------------------
+  -- Treesitter: accurate syntax highlighting + indentation + text objects
+  -- nvim-treesitter v2 API: no configs module; install parsers explicitly,
+  -- highlighting is via vim.treesitter (Neovim built-in).
+  -- -------------------------------------------------------------------------
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    event = { "BufReadPost", "BufNewFile" },
+    config = function()
+      local parsers = {
+        "bash", "c", "cmake", "cpp", "json", "jsonc",
+        "lua", "markdown", "markdown_inline", "python",
+        "typescript", "javascript", "tsx", "vim", "vimdoc",
+        "yaml",
+      }
+      require("nvim-treesitter").install(parsers)
+
+      -- Enable Neovim's built-in treesitter highlighting for these filetypes.
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "bash", "c", "cmake", "cpp", "json", "jsonc",
+          "lua", "markdown", "python",
+          "typescript", "javascript", "tsx", "vim", "vimdoc",
+          "yaml",
+        },
+        callback = function() vim.treesitter.start() end,
+      })
     end,
   },
 
@@ -274,7 +306,6 @@ require("lazy").setup({
   -- { "psf/black",             branch = "stable", ft = "python" },  -- use ruff (LSP) instead
   -- { "nvie/vim-flake8" },                                           -- use pyright/ruff LSP instead
   -- { "rdnetto/YCM-Generator", branch = "stable" },                  -- YCM removed
-  -- { "Valloric/YouCompleteMe" },                                     -- replaced by native LSP
   -- { "SirVer/ultisnips" },                                          -- replaced by LuaSnip
   -- { "honza/vim-snippets" },
   -- { "beloglazov/vim-online-thesaurus" },
@@ -282,11 +313,114 @@ require("lazy").setup({
   -- { "derekwyatt/vim-protodef" },
 
   -- -------------------------------------------------------------------------
+  -- which-key: shows popup of available keymaps when you pause after a prefix
+  -- -------------------------------------------------------------------------
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      preset = "modern",
+      -- Document leader-key groups so the popup is readable
+      spec = {
+        { "<leader>r",  group = "refactor" },
+        { "<leader>q",  group = "quickfix" },
+        { "<leader>c",  group = "code" },
+        { "<leader>g",  group = "git / goto" },
+      },
+    },
+  },
+
+  -- -------------------------------------------------------------------------
   -- AI / coding assistant
   -- -------------------------------------------------------------------------
+  -- Requires CMRE_API_KEY env var (never commit the key).
+  -- For the custom CA cert on Linux, either add it to the system trust store
+  -- or set:  export CURL_CA_BUNDLE=~/.ca-certs/cmregenai_nsf_ca.pem
   {
     "olimorris/codecompanion.nvim",
     event = "VeryLazy",
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
+    keys = {
+      { "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "CodeCompanion chat" },
+      { "<leader>ca", "<cmd>CodeCompanionActions<cr>",     mode = { "n", "v" }, desc = "CodeCompanion actions" },
+    },
+    config = function()
+      local token_cache = nil
+      local lock_warned = false
+
+      local function get_token()
+
+        if token_cache == nil then
+          vim.notify("Fetching API token from pass...", vim.log.levels.INFO)
+          local entry = "work/cmre/nsf/cmregenai/token/" .. vim.fn.hostname()
+          local key = vim.fn.system({ "pass", "show", entry })
+          if vim.v.shell_error == 0 then
+            key = vim.trim(key or "")
+            if key ~= "" then
+              token_cache = key
+              lock_warned = false
+              return key
+            end
+          end
+        end
+
+
+        if token_cache and token_cache ~= "" then
+          if not lock_warned then
+            lock_warned = true
+            vim.schedule(function()
+              vim.notify(
+                "CodeCompanion: pass/GPG is locked; using cached token for this Neovim session.",
+                vim.log.levels.WARN
+              )
+            end)
+          end
+          return token_cache
+        end
+
+        local env_key = vim.trim(vim.fn.getenv("CMRE_API_KEY") or "")
+        if env_key ~= "" then
+          return env_key
+        end
+
+        vim.schedule(function()
+          vim.notify(
+            "CodeCompanion: API token unavailable. Unlock pass before using chat.",
+            vim.log.levels.ERROR
+          )
+        end)
+        return ""
+      end
+
+      require("codecompanion").setup({
+        adapters = {
+          http = {
+            cmre = function()
+              return require("codecompanion.adapters").extend("openai_compatible", {
+                env = {
+                  url     = "https://llm.staging.cmregenai.nsf",
+                },
+                -- Custom CA bundle for the self-hosted server's self-signed cert.
+                -- Place the cert at: ~/.ca-certs/cmregenai_nsf_ca.pem
+                raw = {
+                  "--cacert", vim.fn.expand("~/.ca-certs/cmregenai_nsf_ca.pem"),
+                },
+                headers = {
+                  ["x-api-key"] = get_token,
+                },
+                schema = {
+                  model = { default = "gpt-5" },
+                },
+              })
+            end,
+          },
+        },
+        strategies = {
+          chat   = { adapter = "cmre" },
+          inline = { adapter = "cmre" },
+        },
+      })
+    end,
   },
 
   -- -------------------------------------------------------------------------
@@ -389,8 +523,11 @@ require("lazy").setup({
       "hrsh7th/cmp-path",
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
+      "rafamadriz/friendly-snippets",  -- community snippet library for LuaSnip
     },
     config = function()
+      -- Load VSCode-style snippets from friendly-snippets
+      require("luasnip.loaders.from_vscode").lazy_load()
       local cmp     = require("cmp")
       local luasnip = require("luasnip")
 
@@ -491,8 +628,12 @@ vim.keymap.set("n", "<Leader>b", "<cmd>Buffers<cr>", { desc = "FZF: buffers" })
 vim.keymap.set("n", "<Leader>a", "<cmd>Ag<cr>",      { desc = "FZF: ag search" })
 
 -- nvim-tree keymap (mirrors lazy keys: entry above)
-vim.keymap.set("n", "<Leader>e", "<cmd>NvimTreeFocus<cr>", { desc = "Focus file tree" })
+vim.keymap.set("n", "<Leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle file tree" })
 
 -- vim-easy-align keymaps (mirrors lazy keys: entries above)
 vim.keymap.set("x", "ga", "<Plug>(EasyAlign)", { desc = "Easy align (visual)" })
 vim.keymap.set("n", "ga", "<Plug>(EasyAlign)", { desc = "Easy align (normal)" })
+
+-- codecompanion keymaps (mirrors lazy keys: entries above)
+vim.keymap.set({ "n", "v" }, "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "CodeCompanion chat" })
+vim.keymap.set({ "n", "v" }, "<leader>ca", "<cmd>CodeCompanionActions<cr>",     { desc = "CodeCompanion actions" })

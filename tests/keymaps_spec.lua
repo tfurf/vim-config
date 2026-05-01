@@ -101,3 +101,26 @@ describe("git/table utility keymaps", function()
     assert.is_true(is_mapped("v", "<Leader>gt"), "<Leader>gt not mapped")
   end)
 end)
+
+describe("codecompanion keymaps", function()
+  it("maps <leader>cc to CodeCompanionChat in normal mode", function()
+    assert.is_true(
+      is_mapped("n", "<leader>cc") or lazy_spec_has_key("codecompanion.nvim", "<leader>cc", "n"),
+      "<leader>cc not mapped or declared"
+    )
+  end)
+
+  it("maps <leader>cc to CodeCompanionChat in visual mode", function()
+    assert.is_true(
+      is_mapped("v", "<leader>cc") or lazy_spec_has_key("codecompanion.nvim", "<leader>cc", "v"),
+      "<leader>cc not mapped in visual mode"
+    )
+  end)
+
+  it("maps <leader>ca to CodeCompanionActions in normal mode", function()
+    assert.is_true(
+      is_mapped("n", "<leader>ca") or lazy_spec_has_key("codecompanion.nvim", "<leader>ca", "n"),
+      "<leader>ca not mapped or declared"
+    )
+  end)
+end)

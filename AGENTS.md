@@ -66,3 +66,9 @@ The specs live in `tests/`:
 | texlab | Mason (binary) | LaTeX |
 | cmake-language-server | uv | CMake |
 | harper-ls | `vim.lsp.enable` | prose/markdown |
+
+## General Workflows
+
+- Don't add any helper scripts when a oneliner in README is sufficient.
+- Be concise with everything - less verbage is better.
+- Maintain work items in `TODO` section of `README.md`

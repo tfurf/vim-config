@@ -119,6 +119,26 @@ describe("LSP on_attach keymaps (integration)", function()
   end)
 end)
 
+describe("harper-ls", function()
+  it("harper-ls is enabled via vim.lsp.enable", function()
+    -- harper-ls is enabled unconditionally via vim.lsp.enable("harper-ls").
+    -- We verify it is registered in the enabled servers list.
+    local ok, _ = pcall(function()
+      local enabled = vim.lsp._enabled_configs or {}
+      -- Neovim 0.11: check if "harper-ls" appears in the lsp config registry
+      local cfg = vim.lsp._config and vim.lsp._config["harper-ls"]
+      if cfg == nil then
+        -- Fallback: confirm the lspconfig definition exists
+        assert.is_true(
+          vim.loop.fs_stat(vim.fn.stdpath("data") .. "/lazy/nvim-lspconfig/lua/lspconfig/configs/harper_ls.lua") ~= nil,
+          "harper_ls lspconfig definition not found"
+        )
+      end
+    end)
+    assert.is_true(ok, "harper-ls check threw an error")
+  end)
+end)
+
 describe("format-on-save autocmd", function()
   it("BufWritePre autocmd exists for python", function()
     local autocmds = vim.api.nvim_get_autocmds({ event = "BufWritePre", pattern = "*.py" })

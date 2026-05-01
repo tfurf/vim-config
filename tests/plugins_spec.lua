@@ -100,6 +100,18 @@ describe("editing utility plugins", function()
   it("vim-dispatch is registered", function()
     assert.is_true(has_plugin("vim-dispatch"))
   end)
+
+  it("nvim-treesitter is registered", function()
+    assert.is_true(has_plugin("nvim-treesitter"))
+  end)
+
+  it("which-key.nvim is registered", function()
+    assert.is_true(has_plugin("which-key.nvim"))
+  end)
+
+  it("friendly-snippets is registered", function()
+    assert.is_true(has_plugin("friendly-snippets"))
+  end)
 end)
 
 describe("removed plugins", function()

@@ -1,5 +1,53 @@
 This is largely a fork of [derekwyatt's vim-config](https://github.com/derekwyatt/vim-config).
 
+## TODO
+
+### AI / agent integration (codecompanion.nvim)
+
+`codecompanion.nvim` is already registered as a lazy plugin (`event = "VeryLazy"`) but not yet configured.
+
+Goal: wire it up to a self-hosted OpenAI-compatible API server so chat and inline agent workflows are available directly in Neovim.
+
+Steps:
+1. Configure an adapter pointing at the local server, e.g.:
+   ```lua
+   require("codecompanion").setup({
+     adapters = {
+       my_server = function()
+         return require("codecompanion.adapters").extend("openai_compatible", {
+           env = { url = "http://localhost:11434" },  -- adjust port/host
+           schema = { model = { default = "your-model-name" } },
+         })
+       end,
+     },
+     strategies = {
+       chat   = { adapter = "my_server" },
+       inline = { adapter = "my_server" },
+     },
+   })
+   ```
+2. Add keymaps (e.g. `<leader>cc` for chat, `<leader>ca` for inline action).
+3. Write tests: at minimum check that the adapter name appears in the codecompanion config and that the keymaps are registered.
+4. Verify `:CodeCompanionChat` opens and can reach the server.
+
+Reference: <https://github.com/olimorris/codecompanion.nvim>
+
+---
+
+### Fuzzy finder: evaluate telescope.nvim vs fzf.vim
+
+Currently using `fzf` + `fzf.vim`. [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) is the more common Lua-native choice and has a richer extension ecosystem (LSP pickers, git, diagnostics, etc.).
+
+Evaluation checklist:
+- [ ] Install `telescope.nvim` + `telescope-fzf-native.nvim` alongside fzf.vim (not replacing it yet)
+- [ ] Compare: file search, live grep, buffer list, LSP references/definitions
+- [ ] Check startup-time impact (`--startuptime` before/after)
+- [ ] Check whether `fzf-complete-*` insert-mode mappings have telescope equivalents
+- [ ] Decide: migrate fully, keep both, or stay with fzf.vim
+- [ ] If migrating: update keymaps in `init.lua`, update `keymaps_spec.lua` tests, remove fzf.vim
+
+---
+
 ## Installation
 
 Clone the repo and symlink it so Neovim finds it:
@@ -7,11 +55,8 @@ Clone the repo and symlink it so Neovim finds it:
 ```bash
 cd ~
 git clone https://github.com/tfurf/vim-config .vim
-cd .vim
-bash install.bash
+ln -s ~/.vim ~/.config/nvim
 ```
-
-`install.bash` creates `~/.config/nvim → ~/.vim`.
 
 On first launch, [lazy.nvim](https://github.com/folke/lazy.nvim) will bootstrap itself and install all plugins. [mason.nvim](https://github.com/williamboman/mason.nvim) will then install LSP servers in the background.
 
