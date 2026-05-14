@@ -269,6 +269,7 @@ require("lazy").setup({
       { "ga", "<Plug>(EasyAlign)", mode = "x", desc = "Easy align (visual)" },
       { "ga", "<Plug>(EasyAlign)", mode = "n", desc = "Easy align (normal)" },
     },
+    event = "VeryLazy" 
   },
 
   { "tpope/vim-surround",    event = "VeryLazy" },
@@ -300,6 +301,39 @@ require("lazy").setup({
   {
     "plasticboy/vim-markdown",
     ft = "markdown",
+  },
+
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",
+    lazy = true,
+    ft = "markdown",
+    cmd = {
+      "ObsidianNew", "ObsidianOpen", "ObsidianSearch",
+      "ObsidianQuickSwitch", "ObsidianFollowLink", "ObsidianBacklinks",
+      "ObsidianToday", "ObsidianTomorrow", "ObsidianYesterday",
+      "ObsidianTemplate", "ObsidianTags",
+    },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      workspaces = {
+        {
+          name = "work-notes",
+          path = vim.fn.expand("~/workspaces/notes/"),
+        },
+      },
+      completion = { nvim_cmp = true },
+      new_notes_location = "current_dir",
+      daily_notes = { 
+        folder = "dailies" ,
+        date_format = "%Y-%m-%d",
+    },
+      templates = { 
+        subdir = "templates",
+        date_format = "%Y%m%d",
+        time_format = "%H:%M"
+     },
+    },
   },
 
   -- Commented-out plugins (preserved for reference):
@@ -409,7 +443,7 @@ require("lazy").setup({
                   ["x-api-key"] = get_token,
                 },
                 schema = {
-                  model = { default = "gpt-5" },
+                  model = { default = "gpt-5.2" },
                 },
               })
             end,
