@@ -3,3 +3,4 @@
 
 # lazy.nvim lock file — commit this to pin plugin versions, or ignore to always use latest
 # lazy-lock.json
+lazy-lock.json
